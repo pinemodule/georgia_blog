@@ -4,11 +4,11 @@ module Kennedy
     load_and_authorize_resource class: Kennedy::Post
 
     def index
-      @posts = PostDecorator.decorate(Post.order('updated_at DESC').page(params[:post]))
+      @posts = Kennedy::PostDecorator.decorate(Post.order('updated_at DESC').page(params[:post]))
     end
 
     def search
-      @posts = PostDecorator.decorate(Post.search(params[:query]).page(params[:post]))
+      @posts = Kennedy::PostDecorator.decorate(Post.search(params[:query]).page(params[:post]))
       render :index
     end
 
@@ -17,17 +17,17 @@ module Kennedy
     end
 
     def new
-      @post = PostDecorator.decorate(Post.new)
+      @post = Kennedy::PostDecorator.decorate(Post.new)
       build_associations
     end
 
     def edit
-      @post = PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
       build_associations
     end
 
     def create
-      @post = PostDecorator.decorate(Post.new(params[:post]))
+      @post = Kennedy::PostDecorator.decorate(Post.new(params[:post]))
 
       if @post.save
         redirect_to [:edit, @post], notice: 'Post was successfully created.'
@@ -38,7 +38,7 @@ module Kennedy
     end
 
     def update
-      @post = PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
 
       @post.store_revision do
         @post.update_attributes(params[:post])
@@ -64,7 +64,7 @@ module Kennedy
     end
 
     def publish
-      @post = PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
       @post.publish current_user
       if @post.save
         # Notifier.notify_users(@post, "#{current_user.name} has published the job '#{@post.title}'").deliver
@@ -75,7 +75,7 @@ module Kennedy
     end
 
     def unpublish
-      @post = PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
       @post.unpublish
       if @post.save
         # Notifier.notify_users(@post, "#{current_user.name} has unpublished the job '#{@post.title}'").deliver
@@ -86,7 +86,7 @@ module Kennedy
     end
 
     def ask_for_review
-      @post = PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
       @post.wait_for_review
       if @post.save
         # Notifier.notify_editors(@post, "#{current_user.name} is asking you to review job '#{@post.title}'").deliver
