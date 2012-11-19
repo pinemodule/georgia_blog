@@ -1,0 +1,43 @@
+<h1 class="post-header">
+  <div class="pull-right">
+    <%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, new_post_url, class: 'btn btn-primary' %>
+  </div>
+  Posts
+</h1>
+
+
+<div class='row-fluid'>
+  <div class='span6'>
+    <%= paginate @posts %>
+  </div>
+  <div class='span6'>
+    <div class="pull-right">
+      <%= render 'kennedy/shared/search/posts' %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <th>Title</th>
+    <th>Content</th>
+    <th>URL</th>
+    <th>Status</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% if @posts and @posts.any? %>
+    <%= render @posts %>
+    <% else %>
+    <tr>
+      <td colspan="6">
+        There are currently no posts. <%= link_to 'Create a new one', new_post_url %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @posts %>
+
+<%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, new_post_url, class: 'btn btn-primary' %>
