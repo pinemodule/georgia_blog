@@ -34,6 +34,7 @@ module Kennedy
 
     default_scope includes(:contents)
     scope :published, joins(:status).where('georgia_statuses' => {name: Georgia::Status::PUBLISHED})
+    scope :latest, order('updated_at DESC')
 
     def self.search query
       query.present? ? text_search(query) : scoped
