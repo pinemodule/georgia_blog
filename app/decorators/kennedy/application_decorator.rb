@@ -1,5 +1,5 @@
 module Kennedy
-  class ApplicationDecorator < Draper::Base
+  class ApplicationDecorator < Draper::Decorator
 
     def created_at(options={})
       options[:format] ||= :short

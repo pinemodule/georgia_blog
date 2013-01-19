@@ -1,6 +1,5 @@
 module Kennedy
   class PostDecorator < ApplicationDecorator
-    decorates :post, class: Kennedy::Post
 
     PUBLISHED = 'Published'
     PENDING = 'Pending'
