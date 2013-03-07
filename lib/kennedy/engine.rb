@@ -3,5 +3,6 @@ module Kennedy
     isolate_namespace Kennedy
     require 'rubygems'
     require 'draper'
+    require 'georgia'
   end
 end

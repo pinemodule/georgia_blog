@@ -1,0 +1,18 @@
+<%= f.input :slug, label: 'Post URL', disabled: true,
+input_html: {value: @post.url, class: 'input-xxlarge', data: {slug: @post.slug}},
+hint: "The URL is automatically generated from the post title in the default language.<br />Changing this might break important links to your website. We strongly suggest you contact Motion Eleven before editing a slug.<br/>I understand and would like to <a href='#' class='js-allow-slug-edit'>edit anyway</a>." %>
+
+<fieldset>
+  <legend>Categories</legend>
+  <%= f.association :categories, label: false, as: :check_boxes %>
+</fieldset>
+
+<fieldset>
+  <legend>Template</legend>
+  <div id='templates'>
+    <%= f.hidden_field :template %>
+    <% Kennedy.templates.each do |template| %>
+    <%= render_template template, @post %>
+    <% end -%>
+  </div>
+</fieldset>

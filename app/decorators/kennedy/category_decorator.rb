@@ -1,6 +1,5 @@
 module Kennedy
-  class CategoryDecorator < ApplicationDecorator
-    decorates :category, class: Kennedy::Category
+  class CategoryDecorator < Georgia::ApplicationDecorator
 
     def url
       "/#{(ancestors.map(&:slug) + [slug]).compact.join('/')}"

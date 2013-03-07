@@ -2,49 +2,29 @@
 <%= render 'georgia/shared/messages', model: @post %>
 <% end %>
 
-<div id='edit_page_panel'>
+<div id='edit_post_panel'>
   <%= simple_form_for @post, html: {class: 'form-vertical', data: {'post-id' => @post.id}} do |f| %>
   <div class='row-fluid'>
     <div class='span2'>
       <div class='well'>
         <ul class="nav nav-list">
-          <li class="active">
-            <a href="#home" data-toggle="tab">
-              <%= icon_tag('icon-home') %> Home
-            </a>
-          </li>
           <li class="nav-header">Content</li>
-          <% @post.contents.each do |content| %>
-          <li>
+          <% @post.contents.sort_by(&:locale).each do |content| %>
+          <li class='<%= 'active' if content.locale == current_locale %>'>
             <a href="#<%= content.locale %>" data-toggle="tab">
               <%= icon_tag('icon-file') %> <%= locale_name(content.locale) %>
             </a>
           </li>
           <% end -%>
           <li class="nav-header">Other</li>
-          <li>
-            <a href="#widgets" data-toggle="tab"><%= icon_tag('icon-briefcase') %> Widgets</a>
-          </li>
-          <li>
-            <a href="#revisions" data-toggle="tab"><%= icon_tag('icon-tags') %> Revisions</a>
-          </li>
+          <li><a href="#revisions" data-toggle="tab"><%= icon_tag('icon-tags') %> Revisions</a></li>
+          <li><a href="#settings" data-toggle="tab"><%= icon_tag('icon-cogs') %> Settings</a></li>
           <% unless @post.new_record? %>
           <li class="nav-header">Actions</li>
-          <!-- <li>
-            <%#= link_to_preview @post %>
-          </li> -->
-          <li>
-            <%= link_to_publish @post %>
-          </li>
-          <li>
-            <%= link_to_unpublish @post %>
-          </li>
-          <li>
-            <%= link_to_review @post %>
-          </li>
-          <li>
-            <%= link_to_delete @post %>
-          </li>
+          <li><%= link_to_publish @post %></li>
+          <li><%= link_to_unpublish @post %></li>
+          <li><%= link_to_review @post %></li>
+          <li><%= link_to_delete @post %></li>
           <% end -%>
         </ul>
       </div>
@@ -53,51 +33,18 @@
 
       <div class="tab-content">
 
-        <div class="tab-pane active" id="home">
-
-          <%= f.input :slug, label: 'Post URL', disabled: true,
-          input_html: {value: @post.url, class: 'input-xxlarge', data: {slug: @post.slug}},
-          hint: "The URL is automatically generated from the post title in the default language.<br />Changing this might break important links to your website. We strongly suggest you contact Motion Eleven before editing a slug.<br/>I understand and would like to <a href='#' class='js-allow-slug-edit'>edit anyway</a>." %>
-
-          <fieldset>
-            <legend>Categories</legend>
-            <%= f.association :categories, label: false, as: :check_boxes %>
-          </fieldset>
-
-          <fieldset>
-            <legend>Template</legend>
-            <div id='templates'>
-              <%= f.hidden_field :template %>
-              <% Kennedy.templates.each do |template| %>
-              <%= render_template template, @post %>
-              <% end -%>
-            </div>
-          </fieldset>
-        </div>
-
         <%= f.simple_fields_for :contents do |c| %>
-        <%= render 'georgia/pages/content_fields', f: c %>
+        <%= render 'georgia/pages/fields/content', f: c, locale: c.object.locale, slug: @post.slug %>
         <% end -%>
 
-        <div class="tab-pane" id="slideshow" data-locales='<%= I18n.available_locales.join(',') %>'>
-          <!-- Backbone Slideshow Panel -->
-          Loading ...
-        </div>
-
-        <div class='tab-pane' id='widgets' data-locales='<%= I18n.available_locales.join(',') %>'>
-          <!-- Backbone Widgets Panel -->
-          Loading ...
-        </div>
-
         <div class='tab-pane' id='revisions'>
-          <%= render 'revisions' %>
+          <%= render 'georgia/pages/fields/revisions', revisions: @post.revision_records.decorate %>
         </div>
 
-      </div>
+        <div class="tab-pane" id="settings">
+          <%= render 'kennedy/posts/fields/settings', f: f %>
+        </div>
 
-      <div class="form-actions">
-        <%= f.submit nil, class: 'btn btn-primary' %>
-        <%= link_to 'Cancel', posts_url, class: 'btn' %>
       </div>
 
     </div>

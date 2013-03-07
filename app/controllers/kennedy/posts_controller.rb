@@ -3,12 +3,14 @@ module Kennedy
 
     load_and_authorize_resource class: Kennedy::Post
 
+    before_filter :prepare_new_post, only: [:index, :search]
+
     def index
-      @posts = Kennedy::PostDecorator.decorate(Post.order('updated_at DESC').page(params[:post]))
+      @posts = Kennedy::Post.latest.page(params[:post]).decorate
     end
 
     def search
-      @posts = Kennedy::PostDecorator.decorate(Post.search(params[:query]).page(params[:post]))
+      @posts = Kennedy::Post.search(params[:query]).page(params[:post]).decorate
       render :index
     end
 
@@ -16,37 +18,26 @@ module Kennedy
       redirect_to edit_post_path(params[:id])
     end
 
-    def new
-      @post = Kennedy::PostDecorator.decorate(Post.new)
-      build_associations
-    end
-
     def edit
-      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::Post.find(params[:id]).decorate
       build_associations
     end
 
     def create
-      @post = Kennedy::PostDecorator.decorate(Post.new(params[:post]))
-
-      if @post.save
-        redirect_to [:edit, @post], notice: 'Post was successfully created.'
-      else
-        build_associations
-        render action: :new
-      end
+      @post = Kennedy::Post.new(params[:post])
+      @post.slug = @post.decorate.title.try(:parameterize)
+      @post.created_by = current_user
+      @post.save
     end
 
     def update
-      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::Post.find(params[:id]).decorate
+      @post.update_attributes(params[:post])
 
-      @post.store_revision do
-        @post.update_attributes(params[:post])
+      if @post.valid?
         @post.updated_by = current_user
-      end
-
-      if @post.save!
-        redirect_to [:edit, @post], notice: 'Post was successfully updated.'
+        @post.save
+        redirect_to [:edit, @post], notice: "#{@post.decorate.title} was successfully updated."
       else
         build_associations
         render :edit
@@ -54,28 +45,31 @@ module Kennedy
     end
 
     def destroy
-      @post = Post.find(params[:id])
+      @post = Kennedy::Post.find(params[:id])
 
       if @post.destroy
-        redirect_to posts_url, notice: 'Post was successfully deleted.'
+        unless (request.referer == post_url(@post)) or (request.referer == edit_post_url(@post))
+          redirect_to :back, notice: "#{@post.decorate.title} was successfully deleted."
+        else
+          redirect_to posts_url, notice: "#{@post.decorate.title} was successfully deleted."
+        end
       else
         redirect_to posts_url, alert: 'Oups. Something went wrong.'
       end
     end
 
     def publish
-      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
-      @post.publish current_user
-      if @post.save
-        # Notifier.notify_users(@post, "#{current_user.name} has published the job '#{@post.title}'").deliver
-        redirect_to :back, notice: "'#{@post.title}' was successfully published."
-      else
-        render :edit, alert: "Oups. Something went wrong."
+      @post = Kennedy::Post.find(params[:id]).decorate
+      @post.store_revision do
+        @post.publish current_user
+        @post.save!
       end
+      # Notifier.notify_users(@post, "#{current_user.name} has published the job '#{@post.title}'").deliver
+      redirect_to :back, notice: "'#{@post.title}' was successfully published."
     end
 
     def unpublish
-      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::Post.find(params[:id]).decorate
       @post.unpublish
       if @post.save
         # Notifier.notify_users(@post, "#{current_user.name} has unpublished the job '#{@post.title}'").deliver
@@ -86,7 +80,7 @@ module Kennedy
     end
 
     def ask_for_review
-      @post = Kennedy::PostDecorator.decorate(Post.find(params[:id]))
+      @post = Kennedy::Post.find(params[:id]).decorate
       @post.wait_for_review
       if @post.save
         # Notifier.notify_editors(@post, "#{current_user.name} is asking you to review job '#{@post.title}'").deliver
@@ -105,7 +99,7 @@ module Kennedy
     def sort
       if params[:post]
         params[:post].each_with_index do |id, index|
-          Post.update_all({position: index+1}, {id: id})
+          Kennedy::Post.update_all({position: index+1}, {id: id})
         end
       end
       render nothing: true
@@ -115,8 +109,13 @@ module Kennedy
 
     def build_associations
       I18n.available_locales.map(&:to_s).each do |locale|
-        @post.contents << Georgia::Content.new(locale: locale) unless @post.contents.find_by_locale(locale).present?
+        @post.contents << Georgia::Content.new(locale: locale) unless @post.contents.select{|c| c.locale == locale}.any?
       end
+    end
+
+    def prepare_new_post
+      @post = Kennedy::Post.new
+      @post.contents = [Georgia::Content.new(locale: I18n.default_locale)]
     end
 
   end

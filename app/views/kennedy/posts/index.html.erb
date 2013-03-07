@@ -1,7 +1,13 @@
-<h1 class="post-header">
+<%= content_for :ujs do %>
+<%= render 'new' %>
+<% end -%>
+
+<h1 class="page-header">
+  <% if can? :create, Kennedy::Post %>
   <div class="pull-right">
-    <%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, new_post_url, class: 'btn btn-primary' %>
+    <%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, '#new_post', class: 'btn btn-primary js-new-post', role: 'button', data: {toggle: 'modal'} %>
   </div>
+  <% end -%>
   Posts
 </h1>
 
@@ -50,7 +56,7 @@
     <% else %>
     <tr>
       <td colspan="6">
-        There are currently no posts. <%= link_to 'Create a new one', new_post_url %>
+        There are currently no posts. <%= link_to 'Create a new one', '#new_post', class: 'js-new-post', data: {toggle: 'modal'} %>
       </td>
     </tr>
     <% end %>
@@ -59,4 +65,4 @@
 
 <%= paginate @posts %>
 
-<%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, new_post_url, class: 'btn btn-primary' %>
+<%= link_to "#{icon_tag('icon-plus-sign')} Add Post".html_safe, '#new_post', class: 'btn btn-primary js-new-post', role: 'button', data: {toggle: 'modal'} %>
