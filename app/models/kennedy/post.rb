@@ -24,7 +24,7 @@ module Kennedy
     has_many :comments
 
     belongs_to :updated_by, class_name: Georgia::User
-    scope :latest, order('updated_at DESC')
+    scope :latest, order('kennedy_posts.updated_at DESC')
 
     acts_as_list
     attr_accessible :position
