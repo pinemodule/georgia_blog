@@ -30,6 +30,7 @@ module Kennedy
     attr_accessible :position
 
     scope :ordered, order(:position)
+    scope :not_self, ->(post) {where('kennedy_posts.id != ?', post.id)}
 
   end
 end
