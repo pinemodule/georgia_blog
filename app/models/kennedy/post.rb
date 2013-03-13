@@ -9,7 +9,7 @@ module Kennedy
     include Georgia::Taggable
     include Georgia::Slugable
     include Georgia::Templatable
-    # include Georgia::Orderable Do no scope by parent, no parent_id, why is this scoped anyway?
+    # FIXME: include Georgia::Orderable Do no scope by parent, no parent_id, why is this scoped anyway?
 
     has_ancestry orphan_strategy: :rootify
 
