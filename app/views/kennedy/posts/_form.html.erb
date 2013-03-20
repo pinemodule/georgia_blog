@@ -17,6 +17,7 @@
           </li>
           <% end -%>
           <li class="nav-header">Other</li>
+          <li><a href="#relationships" data-toggle="tab"><%= icon_tag('icon-list-alt') %> Relationships</a></li>
           <li><a href="#revisions" data-toggle="tab"><%= icon_tag('icon-tags') %> Revisions</a></li>
           <li><a href="#settings" data-toggle="tab"><%= icon_tag('icon-cogs') %> Settings</a></li>
           <% unless @post.new_record? %>
@@ -36,6 +37,10 @@
         <%= f.simple_fields_for :contents do |c| %>
         <%= render 'georgia/pages/fields/content', f: c, locale: c.object.locale, slug: @post.slug %>
         <% end -%>
+
+        <div class='tab-pane' id='relationships'>
+          <%= render 'kennedy/posts/fields/relationships', f: f %>
+        </div>
 
         <div class='tab-pane' id='revisions'>
           <%= render 'georgia/pages/fields/revisions', revisions: @post.revision_records.decorate %>

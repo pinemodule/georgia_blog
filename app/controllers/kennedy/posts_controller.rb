@@ -36,7 +36,7 @@ module Kennedy
 
       if @post.valid?
         @post.updated_by = current_user
-        @post.save
+        @post.save!
         redirect_to [:edit, @post], notice: "#{@post.decorate.title} was successfully updated."
       else
         build_associations
