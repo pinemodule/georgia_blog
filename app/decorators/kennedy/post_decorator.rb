@@ -19,7 +19,7 @@ module Kennedy
 
     def categorized_url options={}
       category = options[:category] || source.categories.first
-      [category.try(:slug), source.slug].join('/')
+      [category.try(:slug), source.slug].compact.join('/')
     end
 
     def blog_slug
