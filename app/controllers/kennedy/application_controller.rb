@@ -1,6 +1,4 @@
 module Kennedy
-  class ApplicationController < ActionController::Base
-
-    layout 'georgia/application'
+  class ApplicationController < Georgia::ApplicationController
   end
 end
