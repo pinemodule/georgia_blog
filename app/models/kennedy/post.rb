@@ -1,14 +1,13 @@
 module Kennedy
   class Post < ActiveRecord::Base
 
-    include Georgia::Publishable
-    include Georgia::Revisionable
-    include Georgia::Contentable
-    include Georgia::Previewable
-    include Georgia::Searchable
-    include Georgia::Taggable
-    include Georgia::Slugable
-    include Georgia::Templatable
+    include Georgia::Concerns::Statusable
+    include Georgia::Concerns::Revisionable
+    include Georgia::Concerns::Contentable
+    include Georgia::Concerns::Searchable
+    include Georgia::Concerns::Taggable
+    include Georgia::Concerns::Slugable
+    include Georgia::Concerns::Templatable
     # FIXME: include Georgia::Orderable Do no scope by parent, no parent_id, why is this scoped anyway?
 
     has_ancestry orphan_strategy: :rootify

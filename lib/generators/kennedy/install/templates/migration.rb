@@ -38,15 +38,5 @@ class CreateKennedyModels < ActiveRecord::Migration
     end
     add_index :categories_posts, [:category_id, :post_id]
 
-    # Create Comments
-    create_table :kennedy_comments do |t|
-      t.integer :status_id
-      t.datetime :published_at
-      t.integer :published_by_id
-      t.timestamps
-    end
-    add_index :kennedy_comments, :published_by_id
-    add_index :kennedy_comments, :status_id
-
   end
 end

@@ -14,6 +14,5 @@ Kennedy::Engine.routes.draw do
   end
 
   resources :categories
-  resources :comments
 
 end

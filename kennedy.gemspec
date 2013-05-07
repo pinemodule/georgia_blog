@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Mathieu Gagné"]
   s.email       = ["mathieu@motioneleven.com"]
   s.homepage    = "http://www.motioneleven.com"
-  s.summary     = "Blogging Engine - addon to Georgia"
+  s.summary     = "Bloging Engine - addon to Georgia"
   s.description = "Adds a blogging engine to Motion Eleven's Georgia CMS system."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
