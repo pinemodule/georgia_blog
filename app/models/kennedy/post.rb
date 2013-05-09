@@ -1,35 +1,8 @@
 module Kennedy
-  class Post < ActiveRecord::Base
-
-    include Georgia::Concerns::Statusable
-    include Georgia::Concerns::Revisionable
-    include Georgia::Concerns::Contentable
-    include Georgia::Concerns::Searchable
-    include Georgia::Concerns::Taggable
-    include Georgia::Concerns::Slugable
-    include Georgia::Concerns::Templatable
-    # FIXME: include Georgia::Orderable Do no scope by parent, no parent_id, why is this scoped anyway?
-
-    has_ancestry orphan_strategy: :rootify
-
-    belongs_to :updated_by, class_name: Georgia::User
-    belongs_to :created_by, class_name: Georgia::User
-
-    paginates_per 20
+  class Post < Georgia::Page
 
     attr_accessible :category_ids
     has_and_belongs_to_many :categories
-
-    has_many :comments
-
-    belongs_to :updated_by, class_name: Georgia::User
-    scope :latest, order('kennedy_posts.updated_at DESC')
-
-    acts_as_list
-    attr_accessible :position
-
-    scope :ordered, order(:position)
-    scope :not_self, ->(post) {where('kennedy_posts.id != ?', post.id)}
 
   end
 end

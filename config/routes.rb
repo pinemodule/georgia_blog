@@ -3,13 +3,13 @@ Kennedy::Engine.routes.draw do
   resources :posts do
     collection do
       post :sort
-      match :search
+      get :search
+      get "with_tag/:tag", to: "pages#find_by_tag"
     end
     member do
-      match :preview
-      match :ask_for_review
-      match :publish
-      match :unpublish
+      get :ask_for_review
+      get :publish
+      get :unpublish
     end
   end
 
