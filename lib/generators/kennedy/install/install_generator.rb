@@ -18,7 +18,7 @@ module Kennedy
       end
 
       def create_migration
-        migration_template "migration.rb", "db/migrate/create_kennedy_models.rb"
+        migration_template "create_kennedy_categories.rb", "db/migrate/create_kennedy_categories.rb"
       end
 
       def copy_config
