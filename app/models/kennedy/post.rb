@@ -48,6 +48,16 @@ module Kennedy
       @month ||= published_at.strftime('%B %Y')
     end
 
+    class << self
+      def extra_search_params
+        Proc.new {
+          facet :month, :categories
+          with(:month, params[:m]) unless params[:m].blank?
+          with(:categories, params[:c]) unless params[:t].blank?
+        }
+      end
+    end
+
   end
 
 end
