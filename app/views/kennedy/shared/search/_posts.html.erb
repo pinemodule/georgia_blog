@@ -1,4 +1,0 @@
-<%= form_for :search, url: search_posts_url, html: {class: 'form-search'}, method: :get do |f| %>
-<%= text_field_tag :query, params[:query], class: 'search-query' %>
-<%= f.submit 'Search', name: nil, class: 'btn' %>
-<% end %>
