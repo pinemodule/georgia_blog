@@ -5,6 +5,10 @@ module Kennedy
 
     scope :recent, order(:published_at)
 
+    class << self
+      alias_method :latest, :recent
+    end
+
     searchable do
       text :title, stored: true do
         contents.map(&:title).join(', ')
@@ -56,6 +60,7 @@ module Kennedy
           with(:categories, params[:c]) unless params[:t].blank?
         }
       end
+
     end
 
   end
