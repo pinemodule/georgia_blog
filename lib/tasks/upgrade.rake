@@ -13,6 +13,7 @@ namespace :kennedy do
       post.save!
       puts "#{post.title} recreated."
     end
+    puts 'All posts have been transfered. Feel free to remove kennedy_posts table... after double check.'
   end
 
 end
