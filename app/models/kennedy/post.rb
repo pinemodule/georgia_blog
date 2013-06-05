@@ -49,7 +49,7 @@ module Kennedy
     end
 
     def month
-      @month ||= published_at.strftime('%B %Y')
+      @month ||= published_at.strftime('%B %Y') if published_at.present?
     end
 
     class << self
