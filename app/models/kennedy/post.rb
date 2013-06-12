@@ -28,24 +28,21 @@ module Kennedy
       text :url
       text :template
       text :status_name
-      string :type
       string :title
       string :excerpt
       string :text
       string :url
       string :template
       string :status_name
+      string :type, stored: true # To indexes the subclasses' names of Kennedy::Post, i.e. Event, Press Releases, etc.
       string :keywords, stored: true, multiple: true do
         contents.map(&:keyword_list).flatten
       end
-      string :tag_list, stored: true, multiple: true #Facets (multiple)
-      string :tags do #Ordering (single list)
+      string :tag_list, stored: true, multiple: true # Array for facets
+      string :tags, stored: true do # Single list for ordering
         tag_list.join(', ')
       end
       string :month, stored: true
-      string :categories, multiple: true, stored: true do
-        categories.map(&:name)
-      end
     end
 
     def month
