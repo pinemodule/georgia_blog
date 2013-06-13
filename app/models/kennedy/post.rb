@@ -64,7 +64,7 @@ module Kennedy
     end
 
     searchable do
-      Kennedy::Post.indexable_fields
+      instance_eval &Kennedy::Post.indexable_fields
     end
 
   end
