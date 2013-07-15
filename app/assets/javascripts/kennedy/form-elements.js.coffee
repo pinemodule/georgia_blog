@@ -1,0 +1,2 @@
+jQuery ->
+  $(".js-datepicker").datepicker()
