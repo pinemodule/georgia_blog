@@ -1,7 +1,10 @@
 module Kennedy
   class Post < Georgia::Page
-
+    attr_accessible :post_data_attributes
     has_and_belongs_to_many :categories
+		has_one :post_data
+
+		accepts_nested_attributes_for :post_data
 
     scope :recent, order(:published_at)
 
@@ -11,6 +14,10 @@ module Kennedy
 
     def month
       @month ||= published_at.strftime('%B %Y') if published_at.present?
+    end
+
+    def published_at
+      post_data.published_at || read_attribute(:published_at)
     end
 
     class << self
