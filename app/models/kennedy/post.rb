@@ -17,7 +17,11 @@ module Kennedy
     end
 
     def published_at
-      post_data.published_at || read_attribute(:published_at)
+      if post_data && post_data.published_at
+        post_data.published_at
+      else
+        read_attribute :published_at
+      end
     end
 
     class << self
