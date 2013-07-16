@@ -69,6 +69,7 @@ module Kennedy
             tag_list.join(', ')
           end
           string :month, stored: true
+          string :published_at
         }
       end
 
