@@ -16,6 +16,10 @@ module Kennedy
       @month ||= published_at.strftime('%B %Y') if published_at.present?
     end
 
+    def year
+      @year ||= published_at.year if published_at.present?
+    end
+
     def published_at
       if post_data && post_data.published_at
         post_data.published_at
@@ -69,6 +73,7 @@ module Kennedy
             tag_list.join(', ')
           end
           string :month, stored: true
+          string :year, stored: true
           string :published_at
         }
       end
