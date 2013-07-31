@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.13"
   s.add_dependency "draper"
-  s.add_dependency "georgia", '~> 0.5.0'
-  s.add_dependency "henry", '~> 0.5.0'
+  s.add_dependency "georgia"
+  s.add_dependency "henry"
 
   s.add_development_dependency 'thin'
   s.add_development_dependency 'sqlite3'

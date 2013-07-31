@@ -1,5 +1,5 @@
 module Kennedy
-  class Post < Georgia::Page
+  class Post < Georgia::MetaPage
     attr_accessible :post_data_attributes
     has_and_belongs_to_many :categories
 		has_one :post_data
@@ -57,13 +57,13 @@ module Kennedy
           end
           text :url
           text :template
-          text :status_name
+          text :state
           string :title
           string :excerpt
           string :text
           string :url
           string :template
-          string :status_name
+          string :state
           string :type, stored: true # To indexes the subclasses' names of Kennedy::Post, i.e. Event, Press Releases, etc.
           string :keywords, stored: true, multiple: true do
             contents.map(&:keyword_list).flatten
