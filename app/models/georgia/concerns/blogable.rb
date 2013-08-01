@@ -1,14 +1,13 @@
 require 'active_support/concern'
 
-module Kennedy
+module Georgia
   module Concerns
     module Blogable
       extend ActiveSupport::Concern
 
       included do
         attr_accessible :post_data_attributes
-        has_and_belongs_to_many :categories
-        has_one :post_data, class_name: Kennedy::PostData, foreign_key: :post_id
+        has_one :post_data, class_name: 'Georgia::PostData', foreign_key: :post_id
 
         accepts_nested_attributes_for :post_data
 
@@ -35,7 +34,7 @@ module Kennedy
         end
 
         searchable do
-          instance_eval &Kennedy::Post.indexable_fields
+          instance_eval &Georgia::Post.indexable_fields
         end
       end
 
@@ -74,7 +73,7 @@ module Kennedy
             string :url
             string :template
             string :state
-            string :type, stored: true # To indexes the subclasses' names of Kennedy::Post, i.e. Event, Press Releases, etc.
+            string :type, stored: true # To indexes the subclasses' names of Georgia::Post, i.e. Event, Press Releases, etc.
             string :keywords, stored: true, multiple: true do
               contents.map(&:keyword_list).flatten
             end

@@ -1,4 +1,4 @@
-module Kennedy
+module Georgia
   class PostDecorator < Georgia::PageDecorator
 
     def template_path

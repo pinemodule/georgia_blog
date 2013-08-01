@@ -1,4 +1,4 @@
-Kennedy::Engine.routes.draw do
+Georgia::Engine.routes.draw do
 
   resources :posts do
     collection do
@@ -28,7 +28,5 @@ Kennedy::Engine.routes.draw do
       end
     end
   end
-
-  resources :categories
 
 end

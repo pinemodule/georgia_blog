@@ -2,7 +2,7 @@ module Kennedy
   module Generators
     class UpgradeGenerator < ::Rails::Generators::Base
 
-      desc "Upgrade migration for Kennedy"
+      desc "Upgrade Kennedy"
 
       def upgrade
         rake "kennedy:upgrade"

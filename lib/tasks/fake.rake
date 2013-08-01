@@ -5,14 +5,14 @@ namespace :kennedy do
     current_user = Georgia::User.first
     10.times do
       title = Faker::Lorem.sentence
-      Kennedy::Post.new(slug: title.parameterize) do |post|
+      Georgia::Post.new(slug: title.parameterize) do |post|
         post.contents << Georgia::Content.new(locale: 'en',
           title: title,
           excerpt: Faker::Lorem.paragraph,
           text: Faker::Lorem.paragraphs(4).join(' '))
       end.publish(current_user).save!
     end
-    Kennedy::Post.reindex
+    Georgia::Post.reindex
   end
 
 end

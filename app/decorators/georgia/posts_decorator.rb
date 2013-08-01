@@ -1,4 +1,4 @@
-module Kennedy
+module Georgia
   class PostsDecorator < PaginationDecorator
   end
 end

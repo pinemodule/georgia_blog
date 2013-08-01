@@ -1,7 +1,5 @@
-<% if can? :manage, Kennedy::Post %>
-
-<li class="<%= 'active' if controller_name == 'posts' %>">
-  <%= link_to 'Blog', kennedy.posts_url %>
-</li>
-
+<% if can? :manage, Georgia::Post %>
+  <li class="<%= 'active' if controller_name == 'posts' %>">
+    <%= link_to 'Blog', search_posts_url %>
+  </li>
 <% end -%>
