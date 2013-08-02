@@ -3,5 +3,7 @@ module Kennedy
     require 'rubygems'
     require 'draper'
     require 'georgia'
+
+    extend Georgia::Paths
   end
 end
