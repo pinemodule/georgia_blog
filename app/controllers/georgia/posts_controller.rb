@@ -1,4 +1,4 @@
 module Georgia
-  class PostsController < Georgia::MetaPagesController
+  class PostsController < Georgia::PagesController
   end
 end
