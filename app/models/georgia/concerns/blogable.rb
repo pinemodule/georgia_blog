@@ -9,6 +9,8 @@ module Georgia
         attr_accessible :post_data_attributes
         has_one :post_data, class_name: 'Georgia::PostData', foreign_key: :post_id
 
+        attr_accessible :published_at
+
         accepts_nested_attributes_for :post_data
 
         scope :recent, order(:published_at)
