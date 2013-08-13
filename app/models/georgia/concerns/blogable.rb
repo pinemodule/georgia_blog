@@ -66,13 +66,14 @@ module Georgia
             end
             text :url
             text :template
-            text :state
             string :title
             string :excerpt
             string :text
             string :url
             string :template
-            string :state
+            string :state do
+              public? ? 'public' : 'private'
+            end
             string :type, stored: true # To indexes the subclasses' names of Georgia::Post, i.e. Event, Press Releases, etc.
             string :keywords, stored: true, multiple: true do
               revisions.map{|r| r.contents.map(&:keyword_list)}.flatten.uniq
