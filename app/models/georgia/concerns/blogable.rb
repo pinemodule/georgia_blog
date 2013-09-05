@@ -86,7 +86,7 @@ module Georgia
             end
             string :month, stored: true
             string :year, stored: true
-            string :published_at
+            time :published_at
             time :updated_at # default order
           }
         end
