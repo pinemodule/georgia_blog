@@ -55,7 +55,9 @@ module Georgia
           string :state do
             public? ? 'public' : 'private'
           end
-          string :type, stored: true # To indexes the subclasses' names of Georgia::Post, i.e. Event, Press Releases, etc.
+          string :class_name do
+            self.class.name
+          end
           string :keywords, stored: true, multiple: true do
             revisions.map{|r| r.contents.map(&:keyword_list)}.flatten.uniq
           end
