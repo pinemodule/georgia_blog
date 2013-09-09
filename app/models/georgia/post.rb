@@ -1,6 +1,8 @@
 module Georgia
   class Post < Georgia::Page
 
+    attr_accessible :published_at
+
     scope :recent, order(:published_at)
     class << self
       alias_method :latest, :recent
