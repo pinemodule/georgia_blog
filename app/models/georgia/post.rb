@@ -3,7 +3,7 @@ module Georgia
 
     attr_accessible :published_at
 
-    scope :recent, order(:published_at)
+    scope :recent, order("published_at DESC")
     class << self
       alias_method :latest, :recent
     end
