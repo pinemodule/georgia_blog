@@ -1,20 +1,18 @@
 Georgia::Engine.routes.draw do
 
-  resources :posts do
+  concern :pageable do
     collection do
-      post :sort
       get :search
-      get "with_tag/:tag", to: :find_by_tag
+      post :sort
+      post :publish
+      post :unpublish
+      post 'flush-cache', to: :flush_cache, as: :flush_cache
+      delete '/', to: :destroy
     end
 
     member do
-      get :preview
-      get :draft
-      get :publish
-      get :unpublish
       get :copy
-      get :store
-      post :flush_cache
+      get :settings
     end
 
     resources :revisions do
@@ -24,10 +22,11 @@ Georgia::Engine.routes.draw do
         get :approve
         get :store
         get :decline
-        get :unpublish
-        get :revert
+        get :restore
       end
     end
   end
+
+  resources :posts, concerns: [:pageable]
 
 end
