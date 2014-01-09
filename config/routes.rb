@@ -1,6 +1,7 @@
 Georgia::Engine.routes.draw do
 
   concern :pageable do
+
     collection do
       get :search
       post :sort
