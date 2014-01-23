@@ -1,3 +1,3 @@
 Georgia.setup do |config|
-  config.header += %w(blog)
+  config.navigation += %w(blog)
 end
