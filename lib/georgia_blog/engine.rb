@@ -1,4 +1,4 @@
-module Kennedy
+module GeorgiaBlog
   class Engine < ::Rails::Engine
     require 'rubygems'
     require 'georgia'

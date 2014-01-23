@@ -1,0 +1,1 @@
+require "georgia_blog/engine"

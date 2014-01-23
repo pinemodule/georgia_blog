@@ -1,6 +1,6 @@
-class CreateKennedyPostData < ActiveRecord::Migration
+class CreateGeorgiaPostData < ActiveRecord::Migration
   def change
-    create_table :kennedy_post_data do |t|
+    create_table :georgia_post_data do |t|
       t.datetime :published_at
       t.integer :post_id
 
