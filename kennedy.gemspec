@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://www.motioneleven.com"
   s.summary     = "Bloging Engine - addon to Georgia"
   s.description = "Adds a blogging engine to Motion Eleven's Georgia CMS system."
+  s.license     = 'MIT'
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
