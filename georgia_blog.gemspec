@@ -5,7 +5,7 @@ require "georgia_blog/version"
 
 Gem::Specification.new do |s|
   s.name        = "georgia_blog"
-  s.version     = Kennedy::VERSION
+  s.version     = GeorgiaBlog::VERSION
   s.authors     = ["Mathieu Gagné"]
   s.email       = ["mathieu@motioneleven.com", "gagne.mathieu@hotmail.com"]
   s.homepage    = "https://github.com/georgia-cms/georgia_blog"
