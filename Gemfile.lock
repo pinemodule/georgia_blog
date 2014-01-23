@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kennedy (0.7.1)
+    georgia-blog (0.7.1)
       georgia
       rails (~> 3.2.13)
 
@@ -208,7 +208,6 @@ GEM
       thor (~> 0.14)
     sendgrid (1.2.0)
       json
-      json
     shadowbox-rails (0.0.4)
       sass-rails
     sidekiq (2.17.3)
@@ -252,4 +251,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  kennedy!
+  georgia-blog!
