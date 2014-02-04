@@ -13,8 +13,7 @@ Gem::Specification.new do |s|
   s.description = "Adds a blogging engine to Motion Eleven's Georgia CMS system."
   s.license     = 'MIT'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 3.2.13"
   s.add_dependency "georgia"
 end
