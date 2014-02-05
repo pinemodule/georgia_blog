@@ -1,11 +1,9 @@
 module Georgia
   class Post < Georgia::Page
 
+    Georgia::Indexer.register_extension(:solr, Georgia::Post)
+    Georgia::Indexer.register_extension(:tire, Georgia::Post)
     include Georgia::Indexer::Adapter
-    is_searchable({
-      solr: Georgia::Concerns::SolrGeorgiaPostExtension,
-      tire: Georgia::Concerns::TireGeorgiaPostExtension
-    })
 
     attr_accessible :published_at
 
