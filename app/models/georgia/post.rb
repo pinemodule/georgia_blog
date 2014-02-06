@@ -5,19 +5,12 @@ module Georgia
     Georgia::Indexer.register_extension(:tire, Georgia::Post)
     include Georgia::Indexer::Adapter
 
-    attr_accessible :published_at
+    has_one :post_data
+    delegate :published_at, :month, :year, to: :post_data, prefix: false, allow_nil: true
 
-    scope :recent, order("published_at DESC")
+    scope :recent, order("post_data.published_at DESC")
     class << self
       alias_method :latest, :recent
-    end
-
-    def month
-      @month ||= published_at.strftime('%B %Y') if published_at.present?
-    end
-
-    def year
-      @year ||= published_at.year if published_at.present?
     end
   end
 end
