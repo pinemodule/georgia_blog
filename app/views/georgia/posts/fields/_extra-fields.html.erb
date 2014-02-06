@@ -4,7 +4,7 @@
   </div>
   <div class="fieldset-fields">
     <div class='input-group date'>
-      <%= f.input_field :published_at, as: :string, class: "form-control js-datepicker", data: {format: "DD-MM-YYYY HH:mm"}, value: f.object.published_at.strftime('%d-%m-%Y %H:%M') %>
+      <%= f.input_field :published_at, as: :string, class: "form-control js-datepicker", data: {format: "DD-MM-YYYY HH:mm"}, value: f.object.published_at.try(:strftime, '%d-%m-%Y %H:%M') %>
       <span class="input-group-addon">
         <span class="fa fa-calendar"></span>
       </span>
