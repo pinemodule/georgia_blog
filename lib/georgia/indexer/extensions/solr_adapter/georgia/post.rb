@@ -50,7 +50,7 @@ module Georgia
           end
 
           def self.search_index model, params
-            @search = model.search do
+            model.search do
               fulltext params[:query] do
                 fields(:title, :excerpt, :text, :keywords, :tags, :url, :template)
               end
@@ -63,7 +63,7 @@ module Georgia
               paginate(page: params[:page], per_page: (params[:per] || 25))
               with(:month, params[:m]) unless params[:m].blank?
               with(:tags, params[:c]) unless params[:t].blank?
-            end.results
+            end
           end
 
         end
