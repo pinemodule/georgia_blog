@@ -11,7 +11,7 @@ module Georgia
 
     delegate :published_at, :month, :year, to: :post_data, prefix: false, allow_nil: true
 
-    scope :recent, order("post_data.published_at DESC")
+    scope :recent, joins(:post_data).order("georgia_post_data.published_at DESC")
     class << self
       alias_method :latest, :recent
     end
