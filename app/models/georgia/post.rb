@@ -9,6 +9,9 @@ module Georgia
     accepts_nested_attributes_for :post_data
     attr_accessible :post_data_attributes
 
+    acts_as_taggable_on :categories
+    attr_accessible :category_list if needs_attr_accessible?
+
     delegate :published_at, :month, :year, to: :post_data, prefix: false, allow_nil: true
 
     scope :recent, joins(:post_data).order("georgia_post_data.published_at DESC")

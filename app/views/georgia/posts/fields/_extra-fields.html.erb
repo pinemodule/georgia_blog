@@ -13,3 +13,15 @@
     <% end -%>
   </div>
 </fieldset>
+
+<fieldset>
+  <div class="fieldset-help">
+    <legend>
+      Categories
+      <%= tooltip_tag(icon_tag('info-circle'), "Categories can be used to group similar posts.") %>
+    </legend>
+  </div>
+  <div class="fieldset-fields">
+    <%= f.input :category_list, label: false, input_html: {class: 'js-token-input'} %>
+  </div>
+</fieldset>
