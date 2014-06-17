@@ -2,7 +2,7 @@ class CreateGeorgiaPostData < ActiveRecord::Migration
   def change
     create_table :georgia_post_data do |t|
       t.datetime :published_at
-      t.integer :post_id
+      t.references :post, index: true
 
       t.timestamps
     end
