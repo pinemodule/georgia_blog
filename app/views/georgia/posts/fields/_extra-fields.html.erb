@@ -1,5 +1,16 @@
 <fieldset>
   <div class="fieldset-help">
+    <legend>Author</legend>
+  </div>
+  <div class="fieldset-fields">
+    <%= f.fields_for :post_data do |pd| %>
+      <%= pd.association :author, label: false %>
+    <% end -%>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="fieldset-help">
     <legend>Published Date</legend>
   </div>
   <div class="fieldset-fields">
