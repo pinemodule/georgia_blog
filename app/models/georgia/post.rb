@@ -18,5 +18,10 @@ module Georgia
     class << self
       alias_method :latest, :recent
     end
+
+    scope :by_tag, -> (tags) {tagged_with(tags, on: :tags)}
+    scope :by_category, -> (categories) {tagged_with(categories, on: :categories)}
+    scope :not_postponed, -> (time) { joins(:post_data).where(["georgia_post_data.published_at <= ?", time]).order("georgia_post_data.published_at DESC") }
+
   end
 end
