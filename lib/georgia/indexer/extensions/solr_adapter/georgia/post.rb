@@ -53,6 +53,7 @@ module Georgia
             model.search do
               fulltext params[:query] do
                 fields(:title, :excerpt, :text, :keywords, :tags, :url, :template)
+                boost_fields title: 5.0
               end
               facet :state, :template, :tag_list, :month, :tags
               with(:class_name, model.to_s)
