@@ -22,7 +22,7 @@ module Georgia
     scope :by_tag, -> (tags) {tagged_with(tags, on: :tags)}
     scope :by_category, -> (categories) {tagged_with(categories, on: :categories)}
     scope :not_postponed, -> (time) { joins(:post_data).where(["georgia_post_data.published_at <= ?", time]).order("georgia_post_data.published_at DESC") }
-    scope :by_year_and_month, -> (year, month) { joins(:post_data).where(["georgia_post_data.published_at >= ? AND georgia_post_data.published_at <= ?", Time.new(year, month), Time.new(year, month+1)]).order("georgia_post_data.published_at DESC") }
+    scope :by_year_and_month, -> (year, month) { joins(:post_data).where(["georgia_post_data.published_at >= ? AND georgia_post_data.published_at <= ?", Time.new(year, month), Time.new(year, month)+1.month]).order("georgia_post_data.published_at DESC") }
 
   end
 end
