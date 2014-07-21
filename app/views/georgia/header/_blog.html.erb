@@ -1,3 +1,3 @@
-<% if can? :index, Georgia::Post %>
-  <%= sidebar_navigation_link 'Blog', georgia.search_posts_url, controller: 'posts', icon: 'coffee' %>
+<% if policy(Georgia::Blog::Post).index? %>
+  <%= sidebar_navigation_link 'Blog', georgia.search_blog_posts_url, controller: 'posts', icon: 'coffee' %>
 <% end -%>
